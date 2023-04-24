@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книги</title>
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 >Бібліотека странних знаній</h1>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Книги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="visitors.html">Відвідувачі</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cards.html">Картки</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="stat.html">Статистика</a>
+              </li>
+          </ul>
+        </div>
+    </nav>
+    <div style="display: flex; margin: 1vh 0;">
+        <h3>Всі книги</h3>
+        <button style="margin-left: 45.7vw;" type="button"class="btn-dark" data-bs-toggle="modal" data-bs-target="#modal">Додати книгу</button>
+    </div>
+    <hr>
+    <form action="" onsubmit="event.preventDefault(); searchBook()" style="margin: 1vh 0;">
+        <label for="">Сортувати/шукати за:</label>
+        <select name="" id="sortSelect" style="width: 12vw;" onchange="sortBook()">
+            <option value="id">ID</option>
+            <option value="name">Назва</option>
+            <option value="author">Автор</option>
+            <option value="year">Рік публікації</option>
+            <option value="publisher">Видвець</option>
+            <option value="pages">Кількість сторінок</option>
+            <option value="copies">Кількість примірників</option>
+        </select>
+        <label for="" style="margin-left: 12vw;">Пошук:</label>
+        <input type="search" id="search">
+        <button style="width: 10vw;">Пошук</button>
+    </form>
+
+    <!--Результат пошуку-->
+    <div id="resDiv" style="padding: 5px; margin-left: 1vw;">
+              
+    </div>
+    <hr>
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th>Id</th>
+            <th>Назва</th>
+            <th>Автор</th>
+            <th>Рік публікації</th>
+            <th>Видвець</th>
+            <th>Кількість сторінок</th>
+            <th>Кількість примірників</th>
+            <th>Редагувати</th>
+          </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+
+    <div id="modal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Книга</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <form action="" onsubmit="event.preventDefault(); addBook()">
+                  <label for="">Назва книги:</label>
+                  <br>
+                  <input required type="text" id="name" onkeydown="document.querySelector('#errorname').hidden=true">
+                  <br>
+                  <label class="error-text" for="" id="errorname"></label>
+                  <br>
+
+                  <label for="">Автор:</label>
+                  <br>
+                  <input type="text" id="author" required onkeydown="document.querySelector('#errorauthor').hidden=true">
+                  <br>
+                  <label class="error-text" for="" id="errorauthor"></label>
+                  <br>
+
+                  <label for="">Рік публікації:</label>
+                  <br>
+                  <input type="number" id="year" min="1899" required onkeydown="document.querySelector('#erroryear').hidden=true">
+                  <br>
+                  <label class="error-text" for="" id="erroryear" ></label>
+                  <br>
+
+                  <label for="">Видавець:</label>
+                  <br>
+                  <input type="text" id="publisher" required onkeydown="document.querySelector('#errorpublish').hidden=true">
+                  <br>
+                  <label class="error-text" for="" id="errorpublish"></label>
+                  <br>
+
+                  <label for="">Кількість сторінок:</label>
+                  <br>
+                  <input required type="text" id="pages" required min="1" onkeydown="document.querySelector('#errorpages').hidden=true">
+                  <br>
+                  <label class="error-text" for="" id="errorpages"></label>
+                  <br>
+
+                  <label for="">Кількість примінриків:</label>
+                  <br>
+                  <input required type="number" id="copies" required min="1" onkeydown="document.querySelector('#errorcopies').hidden=true">
+                  <br>
+                  <label class="error-text" for="" id="errorcopies"></label>
+                  <br>
+                  <input type="submit" value="Додати">
+                </form>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+    <div id="editmodal" class="modal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Книга</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form action="" onsubmit="event.preventDefault(); startEditBook()">
+                <label for="">Назва книги:</label>
+                <br>
+                <input type="text" id="editname" required onkeydown="document.querySelector('#edederrorname').hidden=true">
+                <br>
+                <label class="error-text" for="" id="edederrorname"></label>
+                <br>
+
+                <label for="">Автор:</label>
+                <br>
+                <input type="text" id="editauthor" required onkeydown="document.querySelector('#ederrorauthor').hidden=true">
+                <br>
+                <label class="error-text" for="" id="ederrorauthor" required></label>
+                <br>
+
+                <label for="">Рік публікації:</label>
+                <br>
+                <input type="number" id="edityear" min="1899" required onkeydown="document.querySelector('#ederroryear').hidden=true">
+                <br>
+                <label class="error-text" for="" id="ederroryear" ></label>
+                <br>
+
+                <label for="">Видавець:</label>
+                <br>
+                <input type="text" id="editpublisher" required onkeydown="document.querySelector('#ederrorpublish').hidden=true">
+                <br>
+                <label class="error-text" for="" id="ederrorpublish"></label>
+                <br>
+
+                <label for="">Кількість сторінок:</label>
+                <br>
+                <input type="text" id="editpages" required min="1" onkeydown="document.querySelector('#ederrorpages').hidden=true">
+                <br>
+                <label class="error-text" for="" id="ederrorpages"></label>
+                <br>
+
+                <label for="">Кількість примінриків:</label>
+                <br>
+                <input type="number" id="editcopies" required min="1" onkeydown="document.querySelector('#ederrorcopies').hidden=true">
+                <br>
+                <label class="error-text" for="" id="ederrorcopies"></label>
+                <br>
+                <input type="submit" value="Редагувати">
+                <button type="button" onclick="deleteBook()">Видалити</button>
+              </form>
+            </div>
+          </div>
+        </div>
+  </div>
+
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

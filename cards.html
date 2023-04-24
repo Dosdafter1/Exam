@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Картки</title>
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 >Бібліотека странних знаній</h1>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Книги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="visitors.html">Відвідувачі</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="cards.html">Картки</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="stat.html">Статистика</a>
+              </li>
+          </ul>
+        </div>
+    </nav>
+
+    <div style="display: flex; margin: 1vh 0;">
+      <h3>Всі картки</h3>
+      <button style="margin-left: 45.5vw;" type="button"class="btn-dark" data-bs-toggle="modal" data-bs-target="#modal">Додати картку</button>
+    </div>
+    <hr>
+    <form action="" onsubmit="event.preventDefault(); searchCard()" style="margin: 1vh 0;">
+        <label for="">Сортувати/шукати за:</label>
+        <select name="" id="sortSelect" style="width: 13vw;" onchange="sortCard()">
+            <option value="id">ID</option>
+            <option value="visitors">Користувачі</option>
+            <option value="books">Книги</option>
+            <option value="takeDate">Дата взятя книги</option>
+            <option value="returnDate">Дата повернення книги</option>
+        </select>
+        <label for="" style="margin-left: 12vw;">Пошук:</label>
+        <input type="search" id="search">
+        <button style="width: 10vw;">Пошук</button>
+    </form>
+
+      <!--Результат пошуку-->
+    <div id="resDiv" style="padding: 5px; margin-left: 1vw;">
+              
+    </div>
+    <hr>
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th>Id</th>
+            <th>Відвідувач</th>
+            <th>Книга</th>
+            <th>Дата взятя книги</th>
+            <th>Дата повернення книги</th>
+            <th>Редагувати</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+
+    <div id="modal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Картка</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+        
+              <div class="modal-body">
+                <form action="" onsubmit="event.preventDefault(); addCard()">
+                  <label for="">Користувачі:</label>
+                  <br>
+                  <select name="" id="vis"></select>
+                  <br>
+
+                  <label for="">Книги:</label>
+                  <br>
+                  <select name="" id="book"></select>
+                  <br>
+                  <br>
+                  <input type="submit" value="Додати">
+                  
+                </form>
+              </div>
+        
+            </div>
+          </div>
+    </div>
+
+    <div id="editmodal" class="modal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Картка</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <div class="modal-body">
+              <form action="" onsubmit="event.preventDefault(); startEditCard()">
+                <label for="">Користувачі:</label>
+                <br>
+                <select name="" id="editvis" required></select>
+                <br>
+
+                <label for="">Книги:</label>
+                <br>
+                <select name="" id="editbook" required></select>
+                <br>
+                <label for="">Дата взятя книги:</label>
+                <br>
+                <input type="date" id="editdate" required onclick="document.querySelector('#errordate').hidden=true">
+                <label class="error-text" id="errordate"></label>
+                <br>
+                <br>
+                <input type="submit" value="Редагувати">
+                
+              </form>
+            </div>
+      
+          </div>
+        </div>
+  </div>
+
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

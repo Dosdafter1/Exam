@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відвідувачі</title>
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 >Бібліотека странних знаній</h1>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Книги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="visitors.html">Відвідувачі</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cards.html">Картки</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="stat.html">Статистика</a>
+              </li>
+          </ul>
+        </div>
+    </nav>
+
+    <div style="display: flex; margin: 1vh 0;">
+      <h3>Всі відвідувачі</h3>
+      <button style="margin-left: 38.3vw;" type="button"class="btn-dark" data-bs-toggle="modal" data-bs-target="#modal">Додати відвідувача</button>
+    </div>
+    <hr>
+    <form action="" onsubmit="event.preventDefault(); searchVisitor()" style="margin: 1vh 0;">
+        <label for="">Сортувати/шукати за:</label>
+        <select name="" id="sortSelect" style="width: 12vw;" onchange="sortVisitor()">
+            <option value="id">ID</option>
+            <option value="name">ПІБ</option>
+            <option value="phone">Номер телефону</option>
+        </select>
+        <label for="" style="margin-left: 12vw;">Пошук:</label>
+        <input type="search" id="search">
+        <button style="width: 10vw;">Пошук</button>
+    </form>
+
+        <!--Результат пошуку-->
+    <div id="resDiv" style="padding: 5px; margin-left: 1vw;">
+              
+    </div>
+    <hr>
+
+
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+            <th>Id</th>
+            <th>ПІБ</th>
+            <th>Номер телефону</th>
+            <th>Редагувати</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+
+
+    <div id="modal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h4 class="modal-title">Відвідувач</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+        
+              <div class="modal-body" >
+                <form id="form" action="" onsubmit="event.preventDefault(); addVisitor()">
+                  <label for="">ПІБ:</label>
+                  <br>
+                  <input type="text" id="fullname" required onkeydown="document.querySelector('#errorname').hidden=true">
+                  <br>
+                  <label for="" class="error-text" id='errorname' hidden></label>
+                  <br>
+                  <label for="">Номер телофону:</label>
+                  <br>
+                  <input type="text" id="phone" required onkeydown="document.querySelector('#errorphone').hidden=true">
+                  <br>
+                  <label for="" class="error-text" id='errorphone' hidden></label>
+                  <br>
+                  <input type="submit" id="sub" value="Додати">
+                </form>
+              </div>
+        
+            </div>
+          </div>
+    </div>
+
+
+    <!--Редагування-->
+    <div id="editmodal" class="modal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Відвідувач</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <div class="modal-body" >
+              <form id="editform" action="" onsubmit="event.preventDefault(); starteditVisitor()">
+                <label for="">ПІБ:</label>
+                <br>
+                <input type="text" id="editfullname" required onkeydown="document.querySelector('#ederrorname').hidden=true">
+                <br>
+                <label for="" class="error-text" id='ederrorname' hidden></label>
+                <br>
+                <label for="">Номер телофону:</label>
+                <br>
+                <input type="text" id="editphone" required onkeydown="document.querySelector('#ederrorphone').hidden=true">
+                <br>
+                <label for="" class="error-text" id='ederrorphone' hidden></label>
+                <br>
+                <input type="submit" id="sub" value="Редагувати">
+              </form>
+            </div>
+      
+          </div>
+        </div>
+  </div>
+
+
+  <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+  <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
